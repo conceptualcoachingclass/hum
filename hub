@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<title>Valentine Confession 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:'Comic Sans MS','Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  color:white;
+}
+.container{
+  max-width:800px;
+  margin:auto;
+  padding:20px;
+}
+.card{
+  background:rgba(255,255,255,0.2);
+  padding:25px;
+  border-radius:25px;
+  margin:25px 0;
+  box-shadow:0 15px 30px rgba(0,0,0,0.3);
+}
+h1,h2{margin-top:0}
+p{font-size:18px}
+input,textarea{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:20px;
+  margin-top:10px;
+  font-size:16px;
+}
+button{
+  padding:12px 30px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d6d;
+  color:white;
+  font-size:16px;
+  margin-top:15px;
+  cursor:pointer;
+}
+button:disabled{
+  background:#555;
+  cursor:not-allowed;
+}
+.center{text-align:center}
+.hidden{display:none}
+
+/* DRAMA STYLE */
+.drama{
+  background:rgba(0,0,0,0.4);
+  border:2px dashed #fff;
+  animation:shake 0.5s infinite alternate;
+}
+@keyframes shake{
+  from{transform:translateX(-2px)}
+  to{transform:translateX(2px)}
+}
+.big{
+  font-size:22px;
+  line-height:1.6;
+}
+.cry{
+  font-size:50px;
+  animation:cry 1s infinite;
+}
+@keyframes cry{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.1)}
+  100%{transform:scale(1)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card center">
+  <h1>💖 Husband Confession Portal 💖</h1>
+  <p>Tumhari jaan ne banaya 😌</p>
+  <p>Dhyaan se jawab dena… sab record ho raha hai 😈</p>
+</div>
+
+<div class="card">
+  <p>😏 Tum mujhe kya bulaate ho? (nickname)</p>
+  <input id="nickname">
+</div>
+
+<div class="card">
+  <p>🍕 Mujhe khane me sabse zyada kya pasand hai?</p>
+  <input id="food">
+</div>
+
+<div class="card">
+  <p>🎁 Valentine Day pe mere liye kya plan hai?</p>
+  <textarea id="valentineGift"></textarea>
+</div>
+
+<div class="card">
+  <p>🎂 Mera birthday kab aata hai?</p>
+  <input id="birthdayDate">
+</div>
+
+<div class="card">
+  <p>🎂 Main kitne saal ki hoon?</p>
+  <input id="age">
+</div>
+
+<div class="card">
+  <p>🎂 Mere birthday ke liye kya socha hai?</p>
+  <textarea id="birthdayPlan"></textarea>
+</div>
+
+<div class="card">
+  <p>❤️ Sabse romantic cheez jo tumne mere liye ki ho?</p>
+  <textarea id="romantic"></textarea>
+</div>
+
+<div class="card">
+  <p>✈️ May month ki chhutti me mujhe ghoomne kahan le jaoge?</p>
+  <input id="trip">
+</div>
+
+<!-- STUPID QUESTION -->
+<div class="card center">
+  <p>🤪 Sabse important sawal…</p>
+  <h2>Kya tum thode se stupid ho?</h2>
+  <button onclick="checkAllAndShowFinal()">YES 😁</button>
+  <button disabled>NO 😎</button>
+  <p>(No button kharab hai shayad 😜)</p>
+</div>
+
+<!-- FINAL STEP -->
+<div class="card center hidden" id="finalStep">
+  <h2>📄 Final Step</h2>
+  <p>
+    Tumne sab kuch bhar diya hai 😌<br>
+    Ab ek <strong>Confession Report PDF</strong> banegi
+  </p>
+  <p>
+    👉 PDF download hone ke baad<br>
+    use WhatsApp pe apni wife ko bhej dena 💖
+  </p>
+  <button onclick="generatePDF()">PDF DOWNLOAD KARO 📥</button>
+</div>
+
+<!-- DRAMA -->
+<div class="card center hidden drama" id="dramaStep">
+  <div class="cry">👶😭👶</div>
+
+  <p class="big">
+    😱 <strong>OH MY GOD!!!</strong><br><br>
+    Ye tumne kya kar diya!!!<br><br>
+    Tumhara number yahi hai na —<br>
+    <strong>📱 8094591129</strong><br><br>
+    Maine to is game ke bahane<br>
+    💸 <strong>bahut saare paise transfer</strong> kar diye!!!<br><br>
+    Ab bachcha ro raha hai…<br>
+    Main kya karu 😭😭<br><br>
+    <strong>Ab seedha wife hi decide karegi<br>
+    tumhari saza ya maafi 😈💖</strong>
+  </p>
+
+  <p>
+    👉 Jo PDF tumne download ki hai<br>
+    use turant WhatsApp pe apni wife ko bhej do 😌
+  </p>
+
+  <div class="cry">😭😭😭</div>
+</div>
+
+</div>
+
+<!-- jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+function checkAllAndShowFinal(){
+  const ids=[
+    "nickname","food","valentineGift","birthdayDate",
+    "age","birthdayPlan","romantic","trip"
+  ];
+  for(let id of ids){
+    if(!document.getElementById(id).value.trim()){
+      alert("😤 Oye! Sab kuch bharna compulsory hai!");
+      return;
+    }
+  }
+  document.getElementById("finalStep").classList.remove("hidden");
+  document.getElementById("finalStep").scrollIntoView({behavior:"smooth"});
+}
+
+function generatePDF(){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  let y=20;
+
+  doc.setFontSize(14);
+  doc.text("💖 Husband Confession Report 💖",20,y); y+=10;
+
+  doc.setFontSize(11);
+  doc.text("Nickname: "+nickname.value,20,y); y+=8;
+  doc.text("Favourite Food: "+food.value,20,y); y+=8;
+  doc.text("Valentine Plan: "+valentineGift.value,20,y); y+=8;
+  doc.text("Birthday Date: "+birthdayDate.value,20,y); y+=8;
+  doc.text("Age: "+age.value,20,y); y+=8;
+  doc.text("Birthday Plan: "+birthdayPlan.value,20,y); y+=8;
+  doc.text("Romantic Thing: "+romantic.value,20,y); y+=8;
+  doc.text("May Trip Plan: "+trip.value,20,y);
+
+  doc.save("Husband_Confession_Report.pdf");
+
+  setTimeout(()=>{
+    document.getElementById("dramaStep").classList.remove("hidden");
+    document.getElementById("dramaStep")
+      .scrollIntoView({behavior:"smooth"});
+  },1200);
+}
+</script>
+
+</body>
+</html>
